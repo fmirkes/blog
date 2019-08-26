@@ -1,0 +1,11 @@
+ 
+{% extends "skeleton.html.j2" %}
+
+{% block main %}
+  <h3>Latest articles</h3>
+  <ul>
+    {%- for article in articles %}
+      <li><a href="{{ article.link }}">{{ article.title }}</a></li>
+    {%- endfor %}
+  </ul>
+{% endblock %}

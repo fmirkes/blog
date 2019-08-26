@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{{ title|default("fmirkes.github.io") }}</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+    <link rel="stylesheet" href="/static/blog.css">
+    <link rel="stylesheet" href="/static/codehilite.css">
+    <link rel="stylesheet" href="/static/sakura.css">
+    
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="fmirkes.github.io atom feed" />
+    
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Florian Mirkes">
+  </head>
+  <body>
+    <header>
+      <h1>
+        <span class="color-blossom"><big>{ </big></span>
+        fmirkes.github.io
+        <span class="color-blossom"><big> }</big></span>
+        <small> blog</small></h1>
+      <hr />
+      {% if show_back_button|default(false) %}
+      <a href="/">&lt;&lt; back to overview</a>
+      {% endif %}
+    </header>
+    <main>
+    {% block main %}
+    {% endblock %}
+    </main>
+    <footer>
+      <br />
+      {% if show_back_button|default(false) %}
+      <a href="/">&lt;&lt; back to overview</a>
+      {% endif %}
+      <hr />
+      <div class="text-center">
+        <a target="_blank" href="https://github.com/fmirkes">GitHub</a>
+        <small><a target="_blank" href="https://github.com/fmirkes/blog">source</a></small>
+      </div>
+      <div>
+        <small>
+          <span class="float-left">
+            <a target="_blank" href="/atom.xml">atom feed</a>
+          </span>
+          <span class="float-right">
+            powered by <a target="_blank" href="https://github.com/oxalorg/sakura">sakura</a>
+          </span>
+        </small>
+      </div>
+      <br /><br />
+    </footer>
+  </body>
+</html>

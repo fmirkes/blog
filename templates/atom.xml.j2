@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title>fmirkes.github.io</title>
+  <link href="https://fmirkes.github.io/"/>
+  <icon>https://fmirkes.github.io/favicon.ico</icon>
+  <updated>{{ articles[0].updated }}</updated>
+  
+  <id>https://fmirkes.github.io/</id>
+
+  <author>
+    <name>Florian Mirkes</name>
+  </author>
+
+  {% for article in articles %}
+  <entry>
+    <title>{{ article.title }}</title>
+    <link href="https://fmirkes.github.io/{{ article.link }}"/>
+    <id>https://fmirkes.github.io/{{ article.link }}</id>
+    <updated>{{ article.updated }}</updated>
+    <content type="html">
+      {{ article.content }}
+    </content>
+  </entry>
+  {% endfor %}
+</feed>
