@@ -11,7 +11,6 @@
 >
 > 4. Run evdev-right-click-emulation
 
-<summary>
 Finally I got my hands on a new Raspberry Pi 4, and I wanted to use the official 7" touchscreen with it. There was only one problem: The right click didn't work.
 
 There are multiple ways floating around the web to enable it (e.g. in the [official forums][1]), but none of them worked for me under Raspbian 10.
@@ -19,7 +18,6 @@ Even the config files in */usr/share/X11/xorg.conf.d* look like it should work o
 
 After a long frustrating search I found a solution: 
 A small program called [evdev-right-click-emulation][2].
-</summary>
 
 [1]: https://www.raspberrypi.org/forums/viewtopic.php?t=138575
 [2]: https://github.com/PeterCxy/evdev-right-click-emulation
@@ -71,7 +69,7 @@ sudo udevadm trigger
 After a re-login, you should be able to run *evdev-rce* as normal user.
 
 ### Startup evdev-rce on login
-To start *evdev-rce* on login just create the following file:
+Almost done. To start *evdev-rce* on login just create the following file:
 ~~~sh
 # $HOME/.config/autostart/evdev-rce.desktop
 
