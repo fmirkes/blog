@@ -6,10 +6,12 @@ import markdown
 
 from datetime import datetime
 from jinja2 import Environment, FileSystemLoader
+from distutils import dir_util
 
 output_dir = "fmirkes.github.io"
 
 articles_dir = "articles"
+favicon_dir = "favicon"
 static_dir = "static"
 
 templates_dir = "templates"
@@ -80,5 +82,5 @@ if __name__ == "__main__":
     atom_file.close()
 
     shutil.copytree(static_dir, "{}/{}".format(output_dir, static_dir))
-    shutil.copyfile("favicon.ico", "{}/favicon.ico".format(output_dir))
+    dir_util.copy_tree(favicon_dir, "{}/".format(output_dir))
 
