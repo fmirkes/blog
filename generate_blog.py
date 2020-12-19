@@ -36,7 +36,7 @@ if __name__ == "__main__":
     article_files = os.listdir(articles_dir)
     article_files.reverse()
 
-    article_list = []
+    articles_all = {}
     for article in article_files:
         article_name_split = article.split("-", 1)
         
@@ -50,13 +50,19 @@ if __name__ == "__main__":
         article_file.close()
 
         article_date = datetime.strptime(article_date_str, "%Y%m%d")
+        article_year = article_date.year
+
         article_list_entry = {
             "title": article_title,
             "link": article_link,
             "updated": article_date.isoformat(),
             "content": article_html
         }
-        article_list.append(article_list_entry)
+        
+        if article_year in articles_all:
+            articles_all[article_year].append(article_list_entry)
+        else:
+            articles_all[article_year] = [article_list_entry]
 
         article_site_template = jinja_env.get_template("article.html.j2")
         article_site_html = article_site_template.render(
@@ -66,16 +72,15 @@ if __name__ == "__main__":
         article_file.writelines(article_site_html)
         article_file.close()
 
-    
     index_template = jinja_env.get_template("index.html.j2")
-    index_html = index_template.render(articles=article_list)
+    index_html = index_template.render(articles=articles_all)
 
     index_file = open("{}/index.html".format(output_dir), "w")
     index_file.writelines(index_html)
     index_file.close()
 
     atom_template = jinja_env.get_template("atom.xml.j2")
-    atom_xml = atom_template.render(articles=article_list)
+    atom_xml = atom_template.render(articles=articles_all)
 
     atom_file = open("{}/atom.xml".format(output_dir), "w")
     atom_file.writelines(atom_xml)
@@ -83,4 +88,3 @@ if __name__ == "__main__":
 
     shutil.copytree(static_dir, "{}/{}".format(output_dir, static_dir))
     dir_util.copy_tree(favicon_dir, "{}/".format(output_dir))
-

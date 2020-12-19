@@ -4,7 +4,7 @@
   <title>fmirkes.github.io</title>
   <link href="https://fmirkes.github.io/"/>
   <icon>https://fmirkes.github.io/favicon.ico</icon>
-  <updated>{{ articles[0].updated }}</updated>
+  <updated>{{ (articles[articles|first]|last).updated }}</updated>
   
   <id>https://fmirkes.github.io/</id>
 
@@ -12,7 +12,8 @@
     <name>Florian Mirkes</name>
   </author>
 
-  {% for article in articles %}
+  {% for year, article_list in articles.items() %}
+  {%   for article in article_list %}
   <entry>
     <title>{{ article.title }}</title>
     <link href="https://fmirkes.github.io/{{ article.link }}"/>
@@ -22,5 +23,6 @@
       {{ article.content }}
     </content>
   </entry>
+  {%   endfor %}
   {% endfor %}
 </feed>
