@@ -31,7 +31,7 @@ git clone 'https://github.com/PeterCxy/evdev-right-click-emulation.git'
 cd 'evdev-right-click-emulation'
 make all
 sudo cp 'out/evdev-rce' '/usr/local/bin/'
-chmod +x '/usr/local/bin/evdev-rce'
+sudo chmod +x '/usr/local/bin/evdev-rce'
 ~~~
 
 You enable right-clicking by running it via `sudo evdev-rce` from a graphical terminal.
@@ -54,9 +54,8 @@ echo 'uinput' | sudo tee -a /etc/modules
 ~~~
 
 The *uinput* device can be found under */dev/uinput*. By default only root is allowed to access it. We are going to change that with a custom *udev* rule:
-
 ~~~sh
-# /etc/udev/rules.d/99-uinput.rules
+sudo <EDITOR> /etc/udev/rules.d/99-uinput.rules
 
 KERNEL=="uinput", MODE="0660", GROUP="input"
 ~~~
@@ -69,9 +68,10 @@ sudo udevadm trigger
 After a re-login, you should be able to run *evdev-rce* as normal user.
 
 ### Startup evdev-rce on login
-Almost done. To start *evdev-rce* on login just create the following file:
+Almost done. To start *evdev-rce* on login just create the following autostart file:
 ~~~sh
-# $HOME/.config/autostart/evdev-rce.desktop
+mkdir -p "$HOME/.config/autostart"
+<EDITOR> "$HOME/.config/autostart/evdev-rce.desktop"
 
 [Desktop Entry]
 Version=1.0
