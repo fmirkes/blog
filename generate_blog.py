@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 
 import os
-import shutil
 import markdown
+import shutil
 
 from datetime import datetime
-from jinja2 import Environment, FileSystemLoader
 from distutils import dir_util
+from jinja2 import Environment, FileSystemLoader
 
 output_dir = "fmirkes.github.io"
 
