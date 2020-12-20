@@ -16,21 +16,23 @@ static_dir = "static"
 
 templates_dir = "templates"
 
-markdown_extensions = ['markdown.extensions.fenced_code', 'markdown.extensions.codehilite']
+markdown_extensions = ['markdown.extensions.fenced_code',
+                       'markdown.extensions.codehilite']
 
 if __name__ == "__main__":
-    jinja_env = Environment(loader=FileSystemLoader(templates_dir), keep_trailing_newline=True)
+    jinja_env = Environment(loader=FileSystemLoader(
+        templates_dir), keep_trailing_newline=True)
 
     if os.path.exists(output_dir):
         for dirpath, dirnames, filenames in os.walk(output_dir):
             for folder in dirnames:
                 shutil.rmtree("{}/{}".format(dirpath, folder))
-            
+
             for file in filenames:
                 os.remove("{}/{}".format(dirpath, file))
     else:
         os.mkdir(output_dir)
-    
+
     os.mkdir("{}/{}".format(output_dir, articles_dir))
 
     article_files = os.listdir(articles_dir)
@@ -39,14 +41,15 @@ if __name__ == "__main__":
     articles_all = {}
     for article in article_files:
         article_name_split = article.split("-", 1)
-        
+
         article_date_str = article_name_split[0].strip()
         article_title = article_name_split[1].strip()[:-3]
-        
+
         article_link = "{}/{}.html".format(articles_dir, article_date_str)
 
         article_file = open("{}/{}".format(articles_dir, article), "r")
-        article_html = markdown.markdown(article_file.read(), extensions=markdown_extensions)
+        article_html = markdown.markdown(
+            article_file.read(), extensions=markdown_extensions)
         article_file.close()
 
         article_date = datetime.strptime(article_date_str, "%Y%m%d")
@@ -58,7 +61,7 @@ if __name__ == "__main__":
             "updated": article_date.isoformat(),
             "content": article_html
         }
-        
+
         if article_year in articles_all:
             articles_all[article_year].append(article_list_entry)
         else:
