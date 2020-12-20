@@ -20,7 +20,7 @@
     <id>https://fmirkes.github.io/{{ article.link }}</id>
     <updated>{{ article.updated }}</updated>
     <content type="html">
-      {{ article.content }}
+      {{ article.content|e }}
     </content>
   </entry>
   {%   endfor %}
